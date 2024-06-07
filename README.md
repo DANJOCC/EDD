@@ -8,4 +8,12 @@
 ### Segunda clase:
 
 - Nodos
-- listas simples, funiciones basicas
+- listas simples, funciones basicas
+
+### tercera clase:
+
+- listas doblemente enlazadas
+
+### cuarta clase:
+
+- lists circulares simples

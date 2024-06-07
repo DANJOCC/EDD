@@ -10,6 +10,7 @@ class List{
         bool deleteNode(T data);
         bool isEmpty();
         void print();
+        int getLength();
         bool update(int n, T data);
 
 };

@@ -14,7 +14,22 @@ int main(){
     {
         list.insert(x[i]);
     }
+ cout<<"Antes de borrar nodo con valor 7"<<endl;
+ list.print();
+    list.deleteNode(7);
+cout<<"despues de borrar nodo con valor 7"<<endl;
+  list.print();
+ cout<<"Antes de borrar nodo con valor 5"<<endl;
+ list.print();
+list.deleteNode(5);
+cout<<"despues de borrar nodo con valor 5"<<endl;
+     list.print();
 
+    list.update(2,2);
+   cout<<"despues de actualizar nodo en posicion 2"<<endl;
+    list.print();
+    list.update(0,3);
+   cout<<"despues de actualizar nodo en posicion 0"<<endl;
     list.print();
 
 }

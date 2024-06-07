@@ -3,9 +3,15 @@
 using namespace std;
 
 template <class T>
-Node<T>::Node(T data, Node<T>* next){
+Node<T>::Node(T data, Node<T>* next, Node<T>* back){
     this->data=data;
-    if(next!=NULL){
+    if(next!=NULL && back!=NULL){
+        this->next=next;
+        this->back=back;
+    }
+    else if(next==NULL &&  back!=NULL){
+        this->back=back;
+    }else if(next!=NULL &&  back==NULL){
         this->next=next;
     }
 }
@@ -22,6 +28,18 @@ void Node<T>::setNextNode(Node<T>* next){
 }
 
 template <class T>
+Node<T>* Node<T>::getBackNode(){
+    return this->back;
+}
+
+template <class T>
+void Node<T>::setBackNode(Node<T>* back){
+     if(back!=NULL){
+        this->back=back;
+    }
+}
+
+template <class T>
 void Node<T>::setData(T data){
     this->data=data;
 }
@@ -33,7 +51,6 @@ T Node<T>::getData(){
 }
 
 
-
 template<class T>
 void Node<T>::print(){
     cout<<this->data<<endl; //solo para datos simples
@@ -41,6 +58,7 @@ void Node<T>::print(){
 template <class T>
 Node<T>::~Node(){
     next=NULL;
+    back=NULL;
 }
 
 
