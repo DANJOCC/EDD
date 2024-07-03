@@ -17,3 +17,12 @@
 ### cuarta clase:
 
 - lists circulares simples
+
+### quinta clase:
+
+- pilas
+
+### sexta clase:
+
+- colas y colas de prioridad
+- arboles
