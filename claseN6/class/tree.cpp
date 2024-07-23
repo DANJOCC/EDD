@@ -1,4 +1,5 @@
 #include "./tree.h"
+enum ramas{IZQ,DER};
 template<class T>
  bool Tree<T>::isEmpty(){
     return root==NULL;
@@ -9,18 +10,77 @@ void Tree<T>::insert( T data){
 };
 template<class T>
 Node<T>* Tree<T>::insert(Node<T> * node, T data){
+    
     if(node==NULL){
         return new Node<T>(data,NULL,NULL);
     }else if(node->getData()>data){
-        Node<T>* izq=insert(node->getChildren(0),data);
-        node->setChildren(izq,NULL);
+         
+        Node<T>* izq=insert(node->getChildren(IZQ),data);
+       
+        node->setChildren(NULL,izq);
+       
     }
     else if(node->getData()<data){
-         Node<T>* der=insert(node->getChildren(1),data);
-        node->setChildren(NULL,der);
+         
+         Node<T>* der=insert(node->getChildren(DER),data);
+        
+        node->setChildren(der,NULL);
+
+     
     }
     return node;
 };
+template<class T>
+void Tree<T>::eliminate( T data){
+    root=eliminate(root,data);
+};
+template<class T>
+Node<T>* Tree<T>::eliminate(Node<T>* node, T data){
+   if(node==NULL){
+    return NULL;
+   }
+    if(node->getData()>data){
+        Node<T>* izq=eliminate(node->getChildren(IZQ),data);
+        node->setChildren(NULL,izq);
+    }
+    else if(node->getData()<data){
+         Node<T>* der=eliminate(node->getChildren(DER),data);
+        node->setChildren(der,NULL);
+    }
+    else{ //nodo encontrado
+        Node<T>* eliminateNode=node;
+        if(eliminateNode->getChildren(IZQ)==NULL){
+            node=eliminateNode->getChildren(DER);
+        }
+        else if (eliminateNode->getChildren(DER)==NULL){
+            node=eliminateNode->getChildren(IZQ);
+        }else{
+            eliminateNode=replace(eliminateNode);
+        }
+        eliminateNode=NULL;
+    }
+    return node;
+};
+template<class T>
+Node<T>* Tree<T>::replace(Node<T>* node){
+        Node<T>* nodeA=node;
+        Node<T>* nodeB=node->getChildren(IZQ);
+        
+        while (nodeB->getChildren(DER)!=NULL)
+        {
+            nodeA=nodeB;
+            nodeB=nodeB->getChildren(DER);
+        }
+        node->setData(nodeB->getData());
+
+        if(nodeA==node){
+            nodeA->setChildren(NULL,nodeB->getChildren(IZQ));
+        }else{
+            nodeA->setChildren(nodeB->getChildren(IZQ),NULL);
+        }
+        return nodeB;
+        
+}
 template<class T>
 void Tree<T>::print(int orden){
     switch (orden)

@@ -49,6 +49,9 @@ int main(){
     tree.print(1);
     cout<<endl<<"preOrden"<<endl;
     tree.print(2);
+    tree.eliminate('P');
+    cout<<endl<<"inOrden"<<endl;
+    tree.print(1);
  
  
 
