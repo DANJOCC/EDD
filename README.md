@@ -1,4 +1,4 @@
 ### Primera clase
 
-- Clases (classes)
 - Plantillas (templates)
+- Lista simple
