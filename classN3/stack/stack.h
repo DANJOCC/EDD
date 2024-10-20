@@ -1,14 +1,15 @@
 #include "../node/node.cpp"
-
 template<class T>
-class List{
+class Stack{
     private:
         Node<T>* head = nullptr;
+        int length = 0;
     public:
-        List(Node<T>*);
-        void insert(T);
-        void insertFirst(T);
-        bool remove(T);
+        ~Stack();
+        Stack(T,Node<T>*);
+        void push(T);
+        T pop();
         bool isEmpty();
+        int getLength();
         void print();
 };

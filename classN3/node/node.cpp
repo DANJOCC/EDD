@@ -11,6 +11,7 @@ Node<T>::Node(T data, Node<T>* next){
 template<class T>
 Node<T>::~Node(){
     this->next = nullptr;
+   
 }
 template<class T>
 T Node<T>::getData(){
@@ -33,7 +34,7 @@ void Node<T>::setNext(Node<T>* next){
 
 template<class T>
 void Node<T>::print(){
-   cout<<this->data<<endl;
-   cout<<this->next<<endl;
+   cout<<"Data:"<<this->data<<endl;
+   cout<<"Direccion del siguiente: "<<this->next<<endl;
 }
 
