@@ -23,6 +23,7 @@ void List<T>::insertFirst(T data){
     this->head = new Node<T>(data,temp,nullptr);
     temp->setPrev(head);
     temp = nullptr;
+     this->length++;
 }
 template<class T>
 void List<T>::insertLast(T data){
@@ -31,6 +32,7 @@ void List<T>::insertLast(T data){
     this->tail = new Node<T>(data,nullptr,temp);
     temp->setNext(tail);
     temp = nullptr;
+    this->length++;
 }
 template<class T>
 void List<T>::insert(T data){
