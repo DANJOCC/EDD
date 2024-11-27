@@ -24,7 +24,7 @@ class Tree{
         void postOrden(Node<T>*);
         void inOrden(Node<T>*);
         void preOrden(Node<T>*);
-       
+        void indexed(Node<T>*,int);
      
         
 

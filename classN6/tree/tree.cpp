@@ -154,7 +154,7 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
                 if (child->getFe() == -1)
                 {
                     //rotacion doble izquierda
-                 
+                    
                     node=rotation_double_izq(node,child);
                    
                     
@@ -185,6 +185,7 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
 
         if(height_changed){
             Node<T>* child = NULL;
+          
             switch (node->getFe())
             {
             case 1:
@@ -198,22 +199,25 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
                 if (child->getFe() == 1)
                 {
                      //rotacion doble derecha
-                   
+                   cout<<"1"<<endl;
                     node=rotation_double_der(node,child);
+                    cout<<"2"<<endl;
                    
                 }
                 else{
                     //rotacion simple izquierda
-                   
+                   cout<<"3"<<endl;
                     node=rotation_simple_izq(node,child);
+                    cout<<"4"<<endl;
                 }
                 break;
             }
+            
         }
 
     }
     else{ //nodo encontrado
-
+        
         Node<T>* eliminateNode=node;
         height_changed = true;
         if(eliminateNode->getChild(IZQ)==NULL){
@@ -229,8 +233,11 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
             eliminateNode=replace(eliminateNode);
         }
 
+       
         eliminateNode=NULL;
     }
+    
+    
     return node;
 };
 
@@ -330,11 +337,38 @@ void Tree<T>::print(int orden){
     case 1:
         inOrden(root);
         break;
-    default:
+    case 2:
         preOrden(root);
         break;
+    default:
+        indexed(root,0);
     }
 };
+
+template<class T>
+void Tree<T>::indexed(Node<T> *node,int index){
+        
+    if(node==NULL) return; 
+    node->print();
+    cout<<endl;
+    if ((!node->getChild(0) && !node->getChild(1)))
+    {
+        return;
+    }
+    for(int i = 0; i<index+1; i++){
+        cout<<"-";
+    }
+    
+
+    indexed(node->getChild(0),index+1);
+   
+     for(int i = 0; i<index+1; i++){
+        cout<<"-";
+    }
+    
+
+    indexed(node->getChild(1),index+1);
+}
 template<class T>
 void Tree<T>::postOrden(Node<T> *node){
     if(node==NULL) return;
@@ -342,19 +376,33 @@ void Tree<T>::postOrden(Node<T> *node){
     postOrden(node->getChild(0));
     postOrden(node->getChild(1));
     node->print();
+     if ((!node->getChild(0) && !node->getChild(1)))
+    {
+        cout<<"<--(leaf)"<<' ';
+    }
 }
 template<class T>
 void Tree<T>::inOrden(Node<T> *node){
     if(node==NULL) return;
     inOrden(node->getChild(0));
     node->print();
+     if ((!node->getChild(0) && !node->getChild(1)))
+    {
+        cout<<"<--(leaf)"<<' ';
+    }
     inOrden(node->getChild(1));
     
 }
 template<class T>
 void Tree<T>::preOrden(Node<T> *node){
-    if(node==NULL) return;
+        
+    if(node==NULL) return; 
     node->print();
+    if ((!node->getChild(0) && !node->getChild(1)))
+    {
+        cout<<"<--(leaf)"<<' ';
+    }
+    
     preOrden(node->getChild(0));
     preOrden(node->getChild(1));
 }
@@ -428,8 +476,10 @@ Node<T>* Tree<T>::rotation_double_der(Node<T> *node, Node<T> *child ){
 
 
     Node<T>* grandChild = NULL;
-
+    if(node == NULL) cout<<"es nulo node"<<endl;
+    if(child == NULL) cout<<"es nulo child"<<endl;
     grandChild = child->getChild(DER);
+     if(grandChild == NULL) cout<<"es nulo GRANDchild"<<endl;
     node->setLeft(grandChild->getChild(DER));
     grandChild->setRight(node);
     child->setRight(grandChild->getChild(IZQ));

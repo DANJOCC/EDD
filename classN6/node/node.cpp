@@ -49,13 +49,16 @@ void Node<T>::setLeft(Node<T>* left){
     this->left = left;
 
      this->heigth=autoHeight();
+     this->setFe();
 };
 
 template <class T>
 void Node<T>::setRight(Node<T>* right){
+
     this->right = right;
 
      this->heigth=autoHeight();
+     //this->setFe();
 };
 
 template<class T>
@@ -94,15 +97,15 @@ void Node<T>::setFe(){
     }
     else if(this->right != NULL && this->left!=NULL){
 
-        this->fe=(this->right->higth)-(this->left->higth);
+        this->fe=(this->right->heigth)-(this->left->heigth);
     
     }else if(this->right == NULL ){
         
-        this->fe=-(this->left->higth);
+        this->fe=-(this->left->heigth);
     
     }
     else if( this->left==NULL){
-        this->fe=(this->right->higth);
+        this->fe=(this->right->heigth);
     }
 }
 template<class T>

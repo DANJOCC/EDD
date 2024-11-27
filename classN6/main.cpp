@@ -20,19 +20,7 @@ int main(){
 
     tree.print(3); //preorden
 
-    cout<<endl;
-    tree.eliminate('F');
     
-   
-    
-    tree.print(3); // preorden
-
-    cout<<endl;
-    tree.eliminate('D');
- 
-   
-    
-    tree.print(3); //preorden
 
  
  
