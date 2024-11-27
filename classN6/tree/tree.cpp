@@ -11,7 +11,8 @@ template<class T>
  }
 template<class T>
 void Tree<T>::insert( T data){
-    root=insert(root,data);
+    bool heigth_changed = false;
+    root=insert(root,data, height_changed);
 };
 template<class T>
 Node<T>* Tree<T>::insert(Node<T> * node, T data, bool& height_changed){
@@ -22,11 +23,12 @@ Node<T>* Tree<T>::insert(Node<T> * node, T data, bool& height_changed){
 
     }else if(node->getData()>data){
          
-        Node<T>* izq=insert(node->getChild(IZQ), data);
+        Node<T>* izq=insert(node->getChild(IZQ), data, height_changed);
        
         node->setLeft(izq);
 
         if(height_changed){
+            Node<T>* child = NULL;
             switch (node->getFe())
             {
             case 1:
@@ -56,11 +58,12 @@ Node<T>* Tree<T>::insert(Node<T> * node, T data, bool& height_changed){
     }
     else if(node->getData()<data){
          
-         Node<T>* der=insert(node->getChild(DER),data);
+         Node<T>* der=insert(node->getChild(DER),data, height_changed);
         
         node->setRight(der);
 
         if(height_changed){
+            Node<T>* child = NULL;
             switch (node->getFe())
             {
             case 1:
@@ -126,7 +129,8 @@ void Tree<T>::insert_no_recursive(T data){
 
 template<class T>
 void Tree<T>::eliminate( T data){
-    root=eliminate(root,data);
+    bool heigth_changed = false;
+    root=eliminate(root,data, height_changed);
 };
 
 template<class T>
@@ -136,17 +140,17 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
    }
     if(node->getData()>data){
 
-        Node<T>* izq=eliminate(node->getChild(IZQ),data);
+        Node<T>* izq=eliminate(node->getChild(IZQ),data, height_changed);
 
         node->setLeft(izq);
 
         if(height_changed){
+            Node<T>* child = NULL;
             switch (node->getFe())
             {
             case 1:
                child = node->getChild(DER);
 
-               cout<<child->getData()<<endl;
                 if (child->getFe() == -1)
                 {
                     //rotacion doble izquierda
@@ -175,11 +179,12 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
 
     else if(node->getData()<data){
 
-         Node<T>* der=eliminate(node->getChild(DER),data);
+         Node<T>* der=eliminate(node->getChild(DER),data, height_changed);
         
         node->setRight(der);
 
         if(height_changed){
+            Node<T>* child = NULL;
             switch (node->getFe())
             {
             case 1:
@@ -198,7 +203,7 @@ Node<T>* Tree<T>::eliminate(Node<T>* node, T data, bool& height_changed){
                    
                 }
                 else{
-                    //rotacion simple derecha
+                    //rotacion simple izquierda
                    
                     node=rotation_simple_izq(node,child);
                 }
@@ -397,7 +402,7 @@ Node<T>* Tree<T>::rotation_double_izq(Node<T> *node, Node<T> *child ){
     grandChild->setLeft(node);
   
     child->setLeft(grandChild->getChild(DER));
-      cout<<child->getChild(DER)->getData()<<endl;
+
     grandChild->setRight(child);
 
     if(grandChild->getFe() == 1){

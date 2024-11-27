@@ -93,9 +93,13 @@ void Node<T>::setFe(){
         this->fe=0;
     }
     else if(this->right != NULL && this->left!=NULL){
+
         this->fe=(this->right->higth)-(this->left->higth);
+    
     }else if(this->right == NULL ){
+        
         this->fe=-(this->left->higth);
+    
     }
     else if( this->left==NULL){
         this->fe=(this->right->higth);
